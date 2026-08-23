@@ -11,7 +11,6 @@
 <style>
 :root{
   --navy:#1b2a6b;
-  --navy-dark:#101c4d;
   --red:#e2102b;
   --ink:#14213d;
   --muted:#6b7a94;
@@ -22,108 +21,87 @@
 html,body{margin:0;padding:0}
 body{
   font-family:Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  background:var(--bg);color:var(--ink);
-  -webkit-font-smoothing:antialiased;
+  background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;
 }
-.page{max-width:520px;margin:0 auto;background:#fff;min-height:100vh;min-height:100dvh;
-  box-shadow:0 0 60px rgba(16,28,77,.10)}
+/* страница ровно в высоту экрана: колонка без прокрутки */
+.page{
+  max-width:520px;margin:0 auto;background:#fff;
+  min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;
+  box-shadow:0 0 60px rgba(16,28,77,.10)
+}
 
-/* ---------- ШАПКА: эмблема logo1 + текстовая часть как на logo ---------- */
-.brand{display:flex;align-items:center;gap:12px;padding:16px 18px 14px}
-.brand__mark{width:64px;height:64px;flex:none}
+/* ---------- ШАПКА: эмблема + текст в пропорциях логотипа ---------- */
+.brand{display:flex;align-items:center;gap:11px;padding:clamp(8px,1.4vh,16px) 16px;flex:none}
+.brand__mark{width:clamp(44px,7vh,62px);aspect-ratio:1;flex:none}
 .brand__mark img{width:100%;height:100%;object-fit:contain;display:block}
 .brand__text{min-width:0}
-.brand__l1{
-  font-family:"Roboto Condensed",Roboto,Arial,sans-serif;font-weight:700;
-  color:var(--red);font-size:20.5px;line-height:1;letter-spacing:.3px;white-space:nowrap
-}
-.brand__l2{
-  font-family:"Roboto Condensed",Roboto,Arial,sans-serif;font-weight:700;
-  color:var(--navy);font-size:28px;line-height:1.02;letter-spacing:.1px;margin-top:2px;white-space:nowrap
-}
-.brand__rule{display:flex;align-items:center;gap:0;margin:5px 0 4px}
+.brand__l1{font-family:"Roboto Condensed",Roboto,Arial,sans-serif;font-weight:700;color:var(--red);
+  font-size:clamp(15px,2.4vh,20.5px);line-height:1;letter-spacing:.3px;white-space:nowrap}
+.brand__l2{font-family:"Roboto Condensed",Roboto,Arial,sans-serif;font-weight:700;color:var(--navy);
+  font-size:clamp(21px,3.3vh,28px);line-height:1.02;letter-spacing:.1px;margin-top:2px;white-space:nowrap}
+.brand__rule{display:flex;align-items:center;margin:4px 0 3px}
 .brand__rule i{flex:1;height:1px;background:var(--navy);opacity:.55;display:block}
 .brand__rule svg{display:block;flex:none}
-.brand__tag{font-size:8.5px;letter-spacing:.115em;color:var(--navy);opacity:.85;white-space:nowrap;font-weight:500}
+.brand__tag{font-size:clamp(7px,1.05vh,8.5px);letter-spacing:.115em;color:var(--navy);opacity:.85;
+  white-space:nowrap;font-weight:500}
 
-@media (max-width:359px){
-  .brand__mark{width:54px;height:54px}
-  .brand__l1{font-size:16px}.brand__l2{font-size:22px}.brand__tag{font-size:7.5px}
-}
-
-/* ---------- ГЕРОЙ: фото отдельным блоком, не под текстом ---------- */
-.hero{position:relative;overflow:hidden;border-radius:0 0 26px 26px}
-.hero__img{
-  display:block;width:100%;height:260px;object-fit:cover;object-position:center 42%;
-}
-.hero__veil{
-  position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(16,28,77,.20) 0%,rgba(16,28,77,.58) 52%,rgba(16,28,77,.92) 100%);
-}
-.hero__body{position:absolute;left:0;right:0;bottom:0;padding:0 20px 20px;color:#fff}
-.hero__kicker{
-  display:inline-block;background:var(--red);color:#fff;font-size:12px;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;padding:6px 11px;border-radius:6px;margin-bottom:10px
-}
-.hero h1{margin:0 0 8px;font-size:29px;line-height:1.14;font-weight:900;letter-spacing:-.4px}
-.hero p{margin:0;font-size:16px;line-height:1.42;color:rgba(255,255,255,.92)}
-
-/* ---------- ПРЕИМУЩЕСТВА ---------- */
-.facts{display:flex;gap:8px;padding:16px 16px 4px}
-.fact{flex:1;background:var(--bg);border-radius:14px;padding:11px 8px;text-align:center}
-.fact b{display:block;font-size:17px;color:var(--navy);line-height:1.1}
-.fact span{display:block;font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.25}
+/* ---------- ГЕРОЙ: занимает всё свободное место ---------- */
+.hero{position:relative;overflow:hidden;border-radius:0 0 24px 24px;flex:1 1 auto;min-height:104px}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.hero__veil{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(16,28,77,.18) 0%,rgba(16,28,77,.55) 46%,rgba(16,28,77,.92) 100%)}
+.hero__body{position:absolute;left:0;right:0;bottom:0;padding:0 18px clamp(10px,1.8vh,18px);color:#fff}
+.hero__kicker{display:inline-block;background:var(--red);color:#fff;font-size:clamp(10px,1.4vh,12px);
+  font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:5px 10px;border-radius:6px;
+  margin-bottom:clamp(5px,1vh,10px)}
+.hero h1{margin:0 0 clamp(3px,.7vh,8px);font-weight:900;letter-spacing:-.4px;
+  font-size:clamp(20px,3.3vh,29px);line-height:1.13}
+.hero p{margin:0;font-size:clamp(13px,1.8vh,16px);line-height:1.35;color:rgba(255,255,255,.92)}
 
 /* ---------- ФОРМА ---------- */
-.form-wrap{padding:14px 16px 26px}
-.form-card{border:1px solid var(--line);border-radius:18px;padding:18px 16px 20px;background:#fff}
-.form-card h2{margin:0 0 3px;font-size:20px;font-weight:900;color:var(--navy)}
-.form-card .sub{margin:0 0 16px;font-size:14.5px;color:var(--muted);line-height:1.4}
+.form-wrap{flex:none;padding:clamp(10px,1.6vh,16px) 16px calc(clamp(12px,2vh,20px) + env(safe-area-inset-bottom))}
+.form-card h2{margin:0 0 2px;font-size:clamp(17px,2.4vh,20px);font-weight:900;color:var(--navy)}
+.form-card .sub{margin:0 0 clamp(8px,1.5vh,15px);font-size:clamp(12.5px,1.7vh,14.5px);color:var(--muted);line-height:1.35}
 
-label.fl{display:block;font-size:14px;font-weight:700;margin:0 0 6px;color:var(--ink)}
+label.fl{display:block;font-size:clamp(12.5px,1.7vh,14px);font-weight:700;margin:0 0 5px;color:var(--ink)}
 input[type=text],input[type=tel]{
-  width:100%;font-family:inherit;font-size:17px;padding:15px 14px;color:var(--ink);
+  width:100%;font-family:inherit;font-size:16px;color:var(--ink);
+  padding:clamp(11px,1.7vh,15px) 14px;
   border:1.5px solid var(--line);border-radius:12px;background:#f7f9fc;outline:none
 }
 input::placeholder{color:#a7b3c7}
 input:focus{border-color:var(--navy);background:#fff;box-shadow:0 0 0 3px rgba(27,42,107,.10)}
-.field{margin-bottom:14px}
-.err{display:none;color:var(--red);font-size:13.5px;margin-top:6px}
+.field{margin-bottom:clamp(8px,1.4vh,14px)}
+.err{display:none;color:var(--red);font-size:12.5px;margin-top:4px}
 .field.invalid input{border-color:var(--red);background:#fff6f7}
 .field.invalid .err{display:block}
 
-.consent{display:flex;gap:10px;align-items:flex-start;margin:2px 0 16px}
-.consent input{width:20px;height:20px;margin:1px 0 0;flex:none;accent-color:var(--navy)}
-.consent span{font-size:12.5px;color:var(--muted);line-height:1.4}
+.consent{display:flex;gap:9px;align-items:flex-start;margin:0 0 clamp(9px,1.5vh,15px)}
+.consent input{width:19px;height:19px;margin:1px 0 0;flex:none;accent-color:var(--navy)}
+.consent span{font-size:clamp(11px,1.5vh,12.5px);color:var(--muted);line-height:1.35}
 
-button{
-  width:100%;font-family:inherit;font-size:18px;font-weight:900;color:#fff;background:var(--red);
-  border:0;border-radius:12px;padding:17px;cursor:pointer;letter-spacing:.2px;
-  box-shadow:0 6px 16px rgba(226,16,43,.28)
-}
+button{width:100%;font-family:inherit;font-weight:900;color:#fff;background:var(--red);border:0;
+  border-radius:12px;cursor:pointer;letter-spacing:.2px;
+  font-size:clamp(16px,2.2vh,18px);padding:clamp(13px,2vh,17px);
+  box-shadow:0 6px 16px rgba(226,16,43,.28)}
 button:active{transform:translateY(1px)}
 button[disabled]{opacity:.6}
-.under{margin:11px 0 0;text-align:center;font-size:12.5px;color:var(--muted)}
 
 .hp{position:absolute;left:-9999px;width:0;height:0;opacity:0}
 
 /* ---------- БЛАГОДАРНОСТЬ ---------- */
-.thanks{display:none;text-align:center;padding:18px 8px 10px}
-.thanks .ok{width:72px;height:72px;border-radius:50%;margin:0 auto 16px;background:#e9f7ef;
-  display:flex;align-items:center;justify-content:center}
-.thanks .ok svg{width:38px;height:38px}
-.thanks h2{margin:0 0 10px;font-size:23px;font-weight:900;color:var(--navy)}
-.thanks p{margin:0;font-size:16px;color:var(--muted);line-height:1.5}
-
-/* ---------- ПОДВАЛ ---------- */
-.foot{border-top:1px solid var(--line);padding:16px 18px calc(24px + env(safe-area-inset-bottom));
-  text-align:center;font-size:12px;color:var(--muted);line-height:1.5}
+.thanks{display:none;text-align:center;padding:clamp(8px,2vh,22px) 6px}
+.thanks .ok{width:clamp(56px,8vh,72px);aspect-ratio:1;border-radius:50%;margin:0 auto clamp(10px,1.6vh,16px);
+  background:#e9f7ef;display:flex;align-items:center;justify-content:center}
+.thanks .ok svg{width:52%;height:52%}
+.thanks h2{margin:0 0 8px;font-size:clamp(19px,2.8vh,23px);font-weight:900;color:var(--navy)}
+.thanks p{margin:0;font-size:clamp(14px,2vh,16px);color:var(--muted);line-height:1.45}
 </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- шапка: эмблема + текст в пропорциях исходного логотипа -->
   <header class="brand">
     <div class="brand__mark"><img src="iogo1.png" alt="Центр очищения организма"></div>
     <div class="brand__text">
@@ -140,22 +118,15 @@ button[disabled]{opacity:.6}
     </div>
   </header>
 
-  <!-- герой -->
   <section class="hero">
-    <img class="hero__img" src="background.jpg" alt="">
+    <img src="background.jpg" alt="">
     <div class="hero__veil"></div>
     <div class="hero__body">
       <span class="hero__kicker">Бесплатно</span>
       <h1>Запишитесь на бесплатный осмотр</h1>
-      <p>Оставьте имя и номер — врач перезвонит и подберёт удобное время.</p>
+      <p>Оставьте имя и номер — врач перезвонит.</p>
     </div>
   </section>
-
-  <div class="facts">
-    <div class="fact"><b>0 ₸</b><span>первичный осмотр</span></div>
-    <div class="fact"><b>15 мин</b><span>перезвон врача</span></div>
-    <div class="fact"><b>20 сек</b><span>на заявку</span></div>
-  </div>
 
   <div class="form-wrap">
     <div class="form-card">
@@ -185,7 +156,6 @@ button[disabled]{opacity:.6}
           </label>
 
           <button type="submit" id="submitBtn">Записаться бесплатно</button>
-          <p class="under">Осмотр бесплатный. Мы не рассылаем рекламу.</p>
         </form>
       </div>
 
@@ -199,21 +169,14 @@ button[disabled]{opacity:.6}
 
     </div>
   </div>
-
-  <footer class="foot">
-    Центр очищения организма · Сіздің денсаулығыңыз — біздің қамқорлығымыз
-  </footer>
 </div>
 
 <script>
 /* ================== ЗАПИСЬ В GOOGLE ТАБЛИЦУ ==================
-   Ни коннекторов, ни авторизации, ни Apps Script.
    Google Форма работает как невидимый приёмник: пациент заполняет
    ТОЛЬКО эту страницу, а она в фоне отправляет данные в форму,
    и строка сама появляется в связанной с формой таблице.
-   Формы пациент не видит и никуда не переходит.
-   Что вписать — инструкция в GOOGLE-TABLE.md (3 минуты).
-   Пока не вписано — демо-режим без записи.                        */
+   Как поменять форму — в GOOGLE-TABLE.md                        */
 var FORM_ID = "1FAIpQLSf87AS2gilv1OeG-V_ZbNnu0XbN6LONc1J4JUFtuhWxveRvRQ";
 var ENTRY = {
   name:  "entry.294730106",             /* поле «Имя»     */
@@ -270,10 +233,7 @@ document.getElementById("leadForm").addEventListener("submit", function(e){
     document.getElementById("tPhone").textContent = ph;
     document.getElementById("formBlock").style.display = "none";
     document.getElementById("thanks").style.display = "block";
-    window.scrollTo({top:0, behavior:"smooth"});
   }
-
-  if(FORM_ID.indexOf("PASTE") === 0){ done(); return; }  /* демо-режим без таблицы */
 
   /* no-cors: Google не отдаёт ответ скрипту, но строку записывает.
      Пациент остаётся на нашей странице и сразу видит благодарность. */
